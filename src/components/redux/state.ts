@@ -1,3 +1,5 @@
+import {rerenderEntireThree} from "../../render";
+
 type PostType = {
     id: number,
     message: string,
@@ -27,7 +29,7 @@ type MessagesPageType = {
 type FriendsPageType = {
     friends: Array<FriendsType>
 }
-type RootStateType = {
+export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: MessagesPageType
     sidebar: FriendsPageType
@@ -115,6 +117,7 @@ export const addPost = (postMessage: string) => {
     }
 
     state.profilePage.posts.push(newPost)
+    rerenderEntireThree(state)
 }
 
 export default state
