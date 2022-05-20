@@ -21,6 +21,7 @@ const MyPosts = (props: ProfilePageType) => {
     const addPost = () => {
         if (newPostElement.current) { // fix problem with "object may be null"
             props.addPost(newPostElement.current.value)
+            newPostElement.current.value = ''
         }
     }
 
