@@ -21,6 +21,7 @@ type FriendsType = {
 }
 type ProfilePageType = {
     posts: Array<PostType>
+    newPostText: string
 }
 type MessagesPageType = {
     messages: Array<MessageType>
@@ -43,6 +44,7 @@ let state: RootStateType = {
             {id: 3, message: "Darova.", likesCount: 13},
             {id: 4, message: "LaLaLaLa.", likesCount: 14},
         ],
+        newPostText: 'it-kamasutra.com'
     },
 
     dialogsPage: {
