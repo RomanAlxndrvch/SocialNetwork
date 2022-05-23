@@ -2,8 +2,22 @@ import React from "react";
 import classes from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
 import Friends from "./Friends/Friends";
+import friends from "./Friends/Friends";
 
-const Navbar = (props: any) => {
+type PersonType = {
+    id: number,
+    name: string,
+    avatar: string
+}
+type FriendsType = {
+    friends: Array<PersonType>
+}
+
+type NavBarPropsType = {
+    state: FriendsType
+}
+
+const Navbar = (props: NavBarPropsType) => {
     return (
         <nav className={classes.nav}>
 

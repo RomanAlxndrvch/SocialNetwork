@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
 
@@ -9,27 +9,34 @@ type PostsType = {
 }
 type ProfilePageType = {
     posts: Array<PostsType>
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    updatePostText: (newText: string) => void
 }
 
 const MyPosts = (props: ProfilePageType) => {
 
-    let postElement = props.posts.map((post) => <Post message={post.message} likesCount={post.likesCount}/>)
+    const postElement = props.posts.map((post) => <Post message={post.message} likesCount={post.likesCount}/>)
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
+    const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addPost = () => {
-        if (newPostElement.current) { // fix problem with "object may be null"
-            props.addPost(newPostElement.current.value)
+        if (newPostElement.current) {
             newPostElement.current.value = ''
         }
+        props.addPost()
+
+    }
+
+    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updatePostText(e.currentTarget.value)
     }
 
     return (
         <div className={classes.postsBlock}>
             <h3>My Posts</h3>
             <div>
-                <div><textarea ref={newPostElement}></textarea></div>
+                <div>
+                    <textarea onChange={onPostChange} ref={newPostElement}/></div>
                 <div>
                     <button onClick={addPost}>Add post
                     </button>
