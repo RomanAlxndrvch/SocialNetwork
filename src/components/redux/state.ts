@@ -44,7 +44,7 @@ let state: RootStateType = {
             {id: 3, message: "Darova.", likesCount: 13},
             {id: 4, message: "LaLaLaLa.", likesCount: 14},
         ],
-        newPostText: 'it-kamasutra.com'
+        newPostText: ''
     },
 
     dialogsPage: {
@@ -111,14 +111,20 @@ let state: RootStateType = {
     }
 }
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
     const newPost: PostType = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0
     }
 
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
+    rerenderEntireThree(state)
+}
+
+export const updatePostText = (newText: string) => {
+    state.profilePage.newPostText = newText
     rerenderEntireThree(state)
 }
 

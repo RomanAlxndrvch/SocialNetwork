@@ -10,18 +10,20 @@ type PostType = {
 }
 type ProfileType = {
     posts: Array<PostType>
+    newPostText: string
 }
 type StatePropsType = {
     state: ProfileType
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    updatePostText: (newText: string) => void
+
 }
 
 const Profile: React.FC<StatePropsType> = (props) => {
-
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.state.posts} addPost={props.addPost}/>
+            <MyPosts posts={props.state.posts} addPost={props.addPost} updatePostText={props.updatePostText}/>
         </div>
     )
 }
