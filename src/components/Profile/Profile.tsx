@@ -23,7 +23,9 @@ const Profile: React.FC<StatePropsType> = (props) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.state.posts} addPost={props.addPost} updatePostText={props.updatePostText}/>
+            <MyPosts posts={props.state.posts}
+                     addPost={props.addPost}
+                     updatePostText={props.updatePostText}/>
         </div>
     )
 }

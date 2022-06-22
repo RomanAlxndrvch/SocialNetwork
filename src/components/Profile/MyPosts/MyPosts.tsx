@@ -15,7 +15,7 @@ type ProfilePageType = {
 
 const MyPosts = (props: ProfilePageType) => {
 
-    const postElement = props.posts.map((post) => <Post message={post.message} likesCount={post.likesCount}/>)
+    const postElements = props.posts.map((post) => <Post message={post.message} likesCount={post.likesCount}/>)
 
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 
@@ -45,7 +45,7 @@ const MyPosts = (props: ProfilePageType) => {
 
             <div className={classes.posts}>
                 <div>New Post</div>
-                {postElement}
+                {postElements}
             </div>
         </div>
     )
