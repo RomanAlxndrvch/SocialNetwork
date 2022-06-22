@@ -1,5 +1,5 @@
-import {rerenderEntireThree} from "../../render";
-
+let rerenderEntireThree = (e: RootStateType) => {
+}
 type PostType = {
     id: number,
     message: string,
@@ -126,6 +126,10 @@ export const addPost = () => {
 export const updatePostText = (newText: string) => {
     state.profilePage.newPostText = newText
     rerenderEntireThree(state)
+}
+
+export const subscribe = (observer: (state: RootStateType) => void) => {
+    rerenderEntireThree = observer // Pattern : Observer
 }
 
 export default state
