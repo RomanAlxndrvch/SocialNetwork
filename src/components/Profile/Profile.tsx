@@ -2,6 +2,7 @@ import React from "react";
 import classes from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {ActionsType} from "../redux/state";
 
 type PostType = {
     id: number,
@@ -14,8 +15,7 @@ type ProfileType = {
 }
 type StatePropsType = {
     state: ProfileType
-    addPost: () => void
-    updatePostText: (newText: string) => void
+    dispatch: (e: ActionsType) => void
 
 }
 
@@ -24,8 +24,8 @@ const Profile: React.FC<StatePropsType> = (props) => {
         <div>
             <ProfileInfo/>
             <MyPosts posts={props.state.posts}
-                     addPost={props.addPost}
-                     updatePostText={props.updatePostText}/>
+                     dispatch={props.dispatch}
+            />
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
@@ -8,6 +8,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
+import {ActionsType} from "./components/redux/state";
 
 
 type DialogsType = {
@@ -47,8 +48,7 @@ type StatePropsType = {
 }
 type AppPropsType = {
     state: StatePropsType,
-    addPost: () => void
-    updatePostText: (newText: string) => void
+    dispatch: (e: ActionsType) => void
 }
 
 
@@ -60,9 +60,8 @@ function App(props: AppPropsType) {
             <div className={'app-wrapper-content'}>
                 <Route path={'/profile'}
                        render={() => <Profile
-                           state={props.state.profilePage}
-                           addPost={props.addPost}
-                           updatePostText={props.updatePostText}/>}/>
+                           dispatch={props.dispatch}
+                           state={props.state.profilePage}/>}/>
                 <Route path={'/dialogs'}
                        render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                 <Route exact path={'/News'} render={() => <News/>}/>
