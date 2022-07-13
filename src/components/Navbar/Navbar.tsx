@@ -2,7 +2,6 @@ import React from "react";
 import classes from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
 import Friends from "./Friends/Friends";
-import friends from "./Friends/Friends";
 
 type PersonType = {
     id: number,
@@ -12,7 +11,6 @@ type PersonType = {
 type FriendsType = {
     friends: Array<PersonType>
 }
-
 type NavBarPropsType = {
     state: FriendsType
 }
