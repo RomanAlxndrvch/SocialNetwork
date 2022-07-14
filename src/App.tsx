@@ -37,6 +37,7 @@ type ProfilePageType = {
 type DialogsPageType = {
     messages: Array<MessagesType>
     dialogs: Array<DialogsType>
+    newMessageBody: string
 }
 type FriendsPageType = {
     friends: Array<FriendsType>
@@ -63,7 +64,7 @@ function App(props: AppPropsType) {
                            dispatch={props.dispatch}
                            state={props.state.profilePage}/>}/>
                 <Route path={'/dialogs'}
-                       render={() => <Dialogs state={props.state.dialogsPage}/>}/>
+                       render={() => <Dialogs state={props.state.dialogsPage} dispatch={props.dispatch}/>}/>
                 <Route exact path={'/News'} render={() => <News/>}/>
                 <Route exact path={'/Music'} render={() => <Music/>}/>
                 <Route exact path={'/Settings'} render={() => <Settings/>}/>

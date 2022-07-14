@@ -24,6 +24,7 @@ type ProfilePageType = {
 type MessagesPageType = {
     messages: Array<MessageType>
     dialogs: Array<DialogType>
+    newMessageBody: string
 }
 type FriendsPageType = {
     friends: Array<FriendsType>
@@ -48,10 +49,14 @@ export type UpdateNewPostTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
 }
-export type ActionsType = AddPostActionType | UpdateNewPostTextActionType
+export type UpdateNewMessageBody = { type: 'UPDATE_NEW_MESSAGE_BODY', newMessage: string }
+export type AddNewMessage = { type: 'SEND_MESSAGE' }
+export type ActionsType = AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageBody | AddNewMessage
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
+const SEND_MESSAGE = 'SEND_MESSAGE'
 
 let store: StoreType = {
     _state: {
@@ -105,6 +110,7 @@ let store: StoreType = {
                     avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcfJW5O8sjIwR9qwtci0d8yKu9yuflD-RreQnrkpQS9JGwqkJJRukoamCV4PV5BEqtS3o&usqp=CAU'
                 }
             ],
+            newMessageBody: '',
         },
 
         sidebar: {
@@ -153,6 +159,18 @@ let store: StoreType = {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber(this._state)
         }
+
+        else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogsPage.newMessageBody = action.newMessage
+            this._callSubscriber(this._state)
+        }
+
+        else if (action.type === SEND_MESSAGE) {
+            const newMessage: MessageType = {id: 1234, message: this._state.dialogsPage.newMessageBody}
+            this._state.dialogsPage.messages.push(newMessage)
+            this._state.dialogsPage.newMessageBody = ''
+            this._callSubscriber(this._state)
+        }
     }
 }
 
@@ -163,6 +181,10 @@ export const updateNewPostTextActionCreator = (newText: string): UpdateNewPostTe
         newText: newText
     }
 }
+export const updateNewMessageBodyCreator = (newMessage: string): UpdateNewMessageBody => ({
+    type: "UPDATE_NEW_MESSAGE_BODY", newMessage: newMessage
+})
+export const sendMessageCreator = (): AddNewMessage => ({type: "SEND_MESSAGE"})
 
 
 export default store

@@ -1,7 +1,12 @@
-import React from "react";
+import React, {ChangeEvent, ChangeEventHandler} from "react";
 import classes from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
+import {
+    ActionsType,
+    sendMessageCreator,
+    updateNewMessageBodyCreator
+} from "../redux/state";
 
 type DialogType = {
     id: number,
@@ -15,9 +20,11 @@ type MessagesType = {
 type DialogsType = {
     dialogs: Array<DialogType>,
     messages: Array<MessagesType>
+    newMessageBody: string
 }
 type StatePropsType = {
     state: DialogsType
+    dispatch: (e: ActionsType) => void
 }
 
 const Dialogs: React.FC<StatePropsType> = (props) => {
@@ -29,8 +36,13 @@ const Dialogs: React.FC<StatePropsType> = (props) => {
 
     const messageTextArea = React.useRef<HTMLTextAreaElement>(null)
 
+    const newMessageBodyOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let body = e.currentTarget.value
+        props.dispatch(updateNewMessageBodyCreator(body))
+    }
     const showTextAreaText = () => {
-        console.log(messageTextArea.current!.value)
+        props.dispatch(sendMessageCreator())
+        props.dispatch(updateNewMessageBodyCreator(messageTextArea.current!.value = ''))
     }
 
     return (
@@ -41,10 +53,20 @@ const Dialogs: React.FC<StatePropsType> = (props) => {
             </div>
 
             <div className={classes.messages}>
-                {messagesElements}
+                <div>{messagesElements}</div>
+                <div>
+                    <div>
+                        <textarea
+                            value={props.state.newMessageBody}
+                            onChange={newMessageBodyOnChange}
+                        ></textarea>
+                    </div>
+                    <div>
+                        <button className={classes.messageBtn} onClick={showTextAreaText}>Btn</button>
+                    </div>
+                </div>
             </div>
-            <textarea ref={messageTextArea}></textarea>
-            <button className={classes.messageBtn} onClick={showTextAreaText}>Btn</button>
+
 
         </div>
     )
