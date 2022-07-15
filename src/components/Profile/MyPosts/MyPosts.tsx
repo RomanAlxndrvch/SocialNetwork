@@ -2,11 +2,11 @@ import React, {ChangeEvent} from "react";
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {
-    ActionsType, addPostActionCreator,
+    ActionsType,
     AddPostActionType,
-    updateNewPostTextActionCreator,
     UpdateNewPostTextActionType
 } from "../../redux/state";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../redux/profilePage-reducer";
 
 type PostsType = {
     id: number,

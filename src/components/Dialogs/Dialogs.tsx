@@ -4,9 +4,9 @@ import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
 import {
     ActionsType,
-    sendMessageCreator,
-    updateNewMessageBodyCreator
+
 } from "../redux/state";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "../redux/dialogs-reducer";
 
 type DialogType = {
     id: number,
@@ -34,15 +34,12 @@ const Dialogs: React.FC<StatePropsType> = (props) => {
     )
     let messagesElements = props.state.messages.map((message) => <Message message={message.message}/>)
 
-    const messageTextArea = React.useRef<HTMLTextAreaElement>(null)
-
     const newMessageBodyOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.currentTarget.value
         props.dispatch(updateNewMessageBodyCreator(body))
     }
     const showTextAreaText = () => {
         props.dispatch(sendMessageCreator())
-        props.dispatch(updateNewMessageBodyCreator(messageTextArea.current!.value = ''))
     }
 
     return (
