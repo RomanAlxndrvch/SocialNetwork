@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
-import {RootStateType} from './components/redux/state'
-import store from './components/redux/state'
+import {RootStateType} from './components/redux/store'
+import store from './components/redux/redux-store'
+import store1 from './components/redux/store'
+
 
 export const rerenderEntireThree = (state: RootStateType) => {
     console.log('App rendered')
@@ -18,5 +20,8 @@ export const rerenderEntireThree = (state: RootStateType) => {
 }
 
 rerenderEntireThree(store.getState())
-store.subscribe(rerenderEntireThree)
+store.subscribe(() => {
+    let state = store.getState()
+    rerenderEntireThree(state)
+})
 
