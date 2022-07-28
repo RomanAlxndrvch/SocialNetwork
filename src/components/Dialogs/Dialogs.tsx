@@ -7,6 +7,7 @@ import {
 
 } from "../redux/store";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../redux/dialogs-reducer";
+import {storeType} from "../redux/redux-store";
 
 type DialogType = {
     id: number,
@@ -24,7 +25,8 @@ type DialogsType = {
 }
 type StatePropsType = {
     state: DialogsType
-    dispatch: (e: ActionsType) => void
+    updateNewMessageBody: (e: string) => void
+    sendMessageCreator: () => void
 }
 
 const Dialogs: React.FC<StatePropsType> = (props) => {
@@ -35,11 +37,10 @@ const Dialogs: React.FC<StatePropsType> = (props) => {
     let messagesElements = props.state.messages.map((message) => <Message message={message.message}/>)
 
     const newMessageBodyOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.currentTarget.value
-        props.dispatch(updateNewMessageBodyCreator(body))
+        props.updateNewMessageBody(e.currentTarget.value)
     }
     const showTextAreaText = () => {
-        props.dispatch(sendMessageCreator())
+        props.sendMessageCreator()
     }
 
     return (

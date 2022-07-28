@@ -10,6 +10,7 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import {ActionsType, StoreType} from "./components/redux/store";
 import {storeType} from "./components/redux/redux-store";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
 type DialogsType = {
@@ -51,6 +52,7 @@ type StatePropsType = {
 type AppPropsType = {
     state: StatePropsType,
     dispatch: (e: ActionsType) => void
+    store: storeType
 }
 
 
@@ -62,10 +64,11 @@ function App(props: AppPropsType) {
             <div className={'app-wrapper-content'}>
                 <Route path={'/profile'}
                        render={() => <Profile
-                           dispatch={props.dispatch}
-                           state={props.state.profilePage}/>}/>
+                           store={props.store}
+                       />}/>
                 <Route path={'/dialogs'}
-                       render={() => <Dialogs state={props.state.dialogsPage} dispatch={props.dispatch}/>}/>
+                       render={() => <DialogsContainer
+                           store={props.store}/>}/>
                 <Route exact path={'/News'} render={() => <News/>}/>
                 <Route exact path={'/Music'} render={() => <Music/>}/>
                 <Route exact path={'/Settings'} render={() => <Settings/>}/>

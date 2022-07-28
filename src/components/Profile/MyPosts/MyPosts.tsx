@@ -23,8 +23,6 @@ const MyPosts = (props: ProfilePageType) => {
         props.addPost(props.newPostText)
     }
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        console.log(props.newPostText)
-        console.log()
         props.onPostChange((e.currentTarget.value))
     }
 

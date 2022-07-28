@@ -3,6 +3,7 @@ import {ActionsType,} from "../../redux/store";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../redux/profilePage-reducer";
 import MyPosts from "./MyPosts";
 import {ProfileType} from "../Profile";
+import {storeType} from "../../redux/redux-store";
 
 type PostsType = {
     id: number,
@@ -10,22 +11,22 @@ type PostsType = {
     likesCount: number
 }
 type ProfilePageType = {
-    state: ProfileType
-    dispatch: (e: ActionsType) => void
+    store: storeType
 }
 
 const MyPostsContainer = (props: ProfilePageType) => {
+    const state = props.store.getState().profilePage
 
     const addPost = () => {
-        props.dispatch(addPostActionCreator())
+        props.store.dispatch(addPostActionCreator())
     }
     const onPostChange = (e: string) => {
-        props.dispatch(updateNewPostTextActionCreator(e))
+        props.store.dispatch(updateNewPostTextActionCreator(e))
     }
 
     return (
-        <MyPosts posts={props.state.posts} addPost={addPost} onPostChange={onPostChange}
-                 newPostText={props.state.newPostText}/>
+        <MyPosts posts={state.posts} addPost={addPost} onPostChange={onPostChange}
+                 newPostText={state.newPostText}/>
     )
 }
 

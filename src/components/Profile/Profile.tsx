@@ -4,6 +4,7 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {ActionsType} from "../redux/store";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {storeType} from "../redux/redux-store";
 
 type PostType = {
     id: number,
@@ -16,16 +17,14 @@ export type ProfileType = {
 }
 
 type StatePropsType = {
-    state: ProfileType
-    dispatch: (e: ActionsType) => void
+    store: storeType
 }
 
 const Profile: React.FC<StatePropsType> = (props) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer state={props.state}
-                              dispatch={props.dispatch}
+            <MyPostsContainer store={props.store}
             />
         </div>
     )
