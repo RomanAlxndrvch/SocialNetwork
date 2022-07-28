@@ -9,6 +9,7 @@ let reducers = combineReducers({
     sidebar: navbarReducer
 })
 
+export type storeType = ReturnType<typeof reducers>
 let store = createStore(reducers)
 
 export default store

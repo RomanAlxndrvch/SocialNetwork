@@ -8,7 +8,8 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
-import {ActionsType} from "./components/redux/store";
+import {ActionsType, StoreType} from "./components/redux/store";
+import {storeType} from "./components/redux/redux-store";
 
 
 type DialogsType = {

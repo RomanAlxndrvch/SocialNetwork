@@ -5,7 +5,6 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import {RootStateType} from './components/redux/store'
 import store from './components/redux/redux-store'
-import store1 from './components/redux/store'
 
 
 export const rerenderEntireThree = (state: RootStateType) => {
@@ -14,6 +13,7 @@ export const rerenderEntireThree = (state: RootStateType) => {
         <BrowserRouter>
             <App state={state}
                  dispatch={store.dispatch.bind(store)}
+
             />
         </BrowserRouter>, document.getElementById('root')
     );
