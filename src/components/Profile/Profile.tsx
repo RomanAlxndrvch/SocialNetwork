@@ -16,16 +16,13 @@ export type ProfileType = {
     newPostText: string
 }
 
-type StatePropsType = {
-    store: storeType
-}
+type StatePropsType = {}
 
 const Profile: React.FC<StatePropsType> = (props) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store}
-            />
+            <MyPostsContainer/>
         </div>
     )
 }

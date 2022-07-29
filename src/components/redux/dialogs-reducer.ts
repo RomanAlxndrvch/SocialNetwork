@@ -64,7 +64,7 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTy
 
 export const updateNewMessageBodyCreator = (newMessage: string): UpdateNewMessageBody => (
     {
-        type: "UPDATE_NEW_MESSAGE_BODY",
+        type: UPDATE_NEW_MESSAGE_BODY,
         newMessage: newMessage
     } as const
 )

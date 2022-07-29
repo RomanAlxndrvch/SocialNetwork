@@ -2,6 +2,7 @@ import React from "react";
 import classes from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
 import Friends from "./Friends/Friends";
+import store from "../redux/redux-store";
 
 type PersonType = {
     id: number,
@@ -11,9 +12,7 @@ type PersonType = {
 type FriendsType = {
     friends: Array<PersonType>
 }
-type NavBarPropsType = {
-    state: FriendsType
-}
+type NavBarPropsType = {}
 
 const Navbar = (props: NavBarPropsType) => {
     return (
@@ -32,7 +31,7 @@ const Navbar = (props: NavBarPropsType) => {
             <div><NavLink to={'/Settings'} activeClassName={classes.active} className={classes.item}>Settings</NavLink>
             </div>
 
-            <Friends state={props.state.friends}/>
+            <Friends state={store.getState().sidebar.friends}/>
 
         </nav>
     )
