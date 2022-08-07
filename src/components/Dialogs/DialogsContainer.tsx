@@ -4,6 +4,7 @@ import {sendMessageCreator, updateNewMessageBodyCreator} from "../redux/dialogs-
 import {storeType} from "../redux/redux-store";
 import Dialogs from "./Dialogs";
 import StoreContext from "../../StoreContext";
+import {connect} from "react-redux";
 
 type DialogType = {
     id: number,
@@ -43,5 +44,6 @@ const DialogsContainer: React.FC<StatePropsType> = (props) => {
     )
 }
 
+const SuperDialogContainer = connect()(Dialogs)
 
 export default DialogsContainer

@@ -1,6 +1,6 @@
 import {combineReducers, createStore} from "redux";
-import profileReducer from "./profilePage-reducer";
-import dialogsReducer from "./dialogs-reducer";
+import profileReducer, {updateNewPostTextActionCreator} from "./profilePage-reducer";
+import dialogsReducer, {updateNewMessageBodyCreator} from "./dialogs-reducer";
 import navbarReducer from "./navbar-reducer";
 
 let reducers = combineReducers({
