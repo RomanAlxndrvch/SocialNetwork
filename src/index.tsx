@@ -6,8 +6,10 @@ import {BrowserRouter} from "react-router-dom";
 import {RootStateType} from './components/redux/store'
 import store from './components/redux/redux-store'
 import {Provider} from "react-redux";
+import {sendMessageCreator} from "./components/redux/dialogs-reducer";
 
 
+/*
 export const rerenderEntireThree = (state: RootStateType) => {
     console.log('App rendered')
     ReactDOM.render(
@@ -18,10 +20,22 @@ export const rerenderEntireThree = (state: RootStateType) => {
         </BrowserRouter>, document.getElementById('root')
     );
 }
+*/
 
+/*
 rerenderEntireThree(store.getState())
 store.subscribe(() => {
     let state = store.getState()
     rerenderEntireThree(state)
 })
 
+*/
+
+
+ReactDOM.render(
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>, document.getElementById('root')
+);

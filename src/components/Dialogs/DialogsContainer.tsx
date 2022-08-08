@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
     DialogsPageType,
     sendMessageCreator,
@@ -10,28 +9,6 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 
-
-/*const DialogsContainer: React.FC<StatePropsType> = (props) => {
-    return (
-        <StoreContext.Consumer>
-            {(store) => {
-                const state = store.getState().dialogsPage
-
-                const newMessageBodyOnChange = (e: string) => {
-                    store.dispatch(updateNewMessageBodyCreator(e))
-                }
-                const showTextAreaText = () => {
-                    store.dispatch(sendMessageCreator())
-                }
-
-                return <Dialogs state={state}
-                                updateNewMessageBody={newMessageBodyOnChange}
-                                sendMessageCreator={showTextAreaText}/>
-            }}
-        </StoreContext.Consumer>
-
-    )
-}*/
 
 type MapStateToPropsType = {
     dialogsPage: DialogsPageType

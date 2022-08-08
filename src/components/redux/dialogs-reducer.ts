@@ -72,7 +72,7 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTy
     switch (action.type) {
         case 'UPDATE_NEW_MESSAGE_BODY':
             state.newMessageBody = action.newMessage
-            return state
+            return {...state, newMessageBody: action.newMessage}
         case 'SEND_MESSAGE':
             const newMessage: MessageType = {id: 1234, message: state.newMessageBody}
             state.messages.push(newMessage)

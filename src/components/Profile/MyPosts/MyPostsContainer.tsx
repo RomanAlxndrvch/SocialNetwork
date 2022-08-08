@@ -5,43 +5,15 @@ import {connect} from "react-redux";
 import {stateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 
-
 type PostsType = {
     id: number,
     message: string,
     likesCount: number
 }
-type ProfilePageType = {}
-
-/*const MyPostsContainer = (props: ProfilePageType) => {
-       return (
-            <StoreContext.Consumer>
-                {(store) => {
-                    const state = store.getState().profilePage
-
-                    const addPost = () => {
-                        store.dispatch(addPostActionCreator())
-                    }
-
-                    const onPostChange = (e: string) => {
-                        store.dispatch(updateNewPostTextActionCreator(e))
-                    }
-
-                    return <MyPosts posts={state.posts}
-                                    addPost={addPost}
-                                    onPostChange={onPostChange}
-                                    newPostText={state.newPostText}/>
-                }
-                }
-            </StoreContext.Consumer>
-        )
-}*/
-
 type MapStateToPropsType = {
     posts: Array<PostsType>
     newPostText: string
 }
-
 type MapDispatchPropsType = {
     addPost: () => void
     onPostChange: (e: string) => void
