@@ -1,4 +1,5 @@
-import {ActionsType, NavbarPageType} from "./store";
+import {NavbarPageType} from "./store";
+import {ActionsType} from "./dialogs-reducer";
 
 export {}
 

@@ -1,9 +1,30 @@
-import {ActionsType, AddNewMessage, DialogsPageType, MessageType, UpdateNewMessageBody} from "./store";
+export type MessageType = {
+    id: number,
+    message: string
+}
+type DialogType = {
+    id: number,
+    name: string,
+    avatar: string
+}
+export type DialogsPageType = {
+    messages: Array<MessageType>
+    dialogs: Array<DialogType>
+    newMessageBody: string
+}
 
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
-const SEND_MESSAGE = 'SEND_MESSAGE'
+export type AddPostActionType = {
+    type: 'ADD-POST'
+}
+export type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+export type UpdateNewMessageBody = { type: 'UPDATE_NEW_MESSAGE_BODY', newMessage: string }
+export type AddNewMessage = { type: 'SEND_MESSAGE' }
+export type ActionsType = AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageBody | AddNewMessage
 
-let initialState =
+let initialState: DialogsPageType =
     {
         messages: [
             {id: 1, message: 'Hi :)'},
@@ -47,12 +68,12 @@ let initialState =
         newMessageBody: '',
     }
 
-const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType) => {
+const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType): DialogsPageType => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
+        case 'UPDATE_NEW_MESSAGE_BODY':
             state.newMessageBody = action.newMessage
             return state
-        case SEND_MESSAGE:
+        case 'SEND_MESSAGE':
             const newMessage: MessageType = {id: 1234, message: state.newMessageBody}
             state.messages.push(newMessage)
             state.newMessageBody = ''
@@ -64,14 +85,13 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTy
 
 export const updateNewMessageBodyCreator = (newMessage: string): UpdateNewMessageBody => (
     {
-        type: UPDATE_NEW_MESSAGE_BODY,
+        type: 'UPDATE_NEW_MESSAGE_BODY',
         newMessage: newMessage
     } as const
 )
 
 export const sendMessageCreator = (): AddNewMessage => (
-    {type: SEND_MESSAGE} as const)
-
+    {type: 'SEND_MESSAGE'} as const)
 
 export default dialogsReducer
 

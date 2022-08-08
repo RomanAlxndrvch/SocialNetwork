@@ -7,7 +7,7 @@ export type PostType = {
     message: string,
     likesCount: number
 }
-export type MessageType = {
+type MessageType = {
     id: number,
     message: string
 }
@@ -21,11 +21,11 @@ type FriendsType = {
     name: string,
     avatar: string
 }
-export type ProfilePageType = {
+type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
 }
-export type DialogsPageType = {
+type DialogsPageType = {
     messages: Array<MessageType>
     dialogs: Array<DialogType>
     newMessageBody: string
@@ -46,16 +46,16 @@ export type StoreType = {
     dispatch: (action: any) => void
 }
 
-export type AddPostActionType = {
+type AddPostActionType = {
     type: 'ADD-POST'
 }
-export type UpdateNewPostTextActionType = {
+type UpdateNewPostTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
 }
-export type UpdateNewMessageBody = { type: 'UPDATE_NEW_MESSAGE_BODY', newMessage: string }
-export type AddNewMessage = { type: 'SEND_MESSAGE' }
-export type ActionsType = AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageBody | AddNewMessage
+type UpdateNewMessageBody = { type: 'UPDATE_NEW_MESSAGE_BODY', newMessage: string }
+type AddNewMessage = { type: 'SEND_MESSAGE' }
+type ActionsType = AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageBody | AddNewMessage
 
 let store: StoreType = {
     _state: {

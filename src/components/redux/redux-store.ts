@@ -3,14 +3,16 @@ import profileReducer, {updateNewPostTextActionCreator} from "./profilePage-redu
 import dialogsReducer, {updateNewMessageBodyCreator} from "./dialogs-reducer";
 import navbarReducer from "./navbar-reducer";
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: navbarReducer
 })
 
-export type stateType = ReturnType<typeof reducers> // типизация того,что наш стор вернет
-let store = createStore(reducers)
+let store = createStore(rootReducer)
+
+export type stateType = ReturnType<typeof rootReducer> // типизация того,что наш стор вернет
 export type storeType = typeof store // типизация самого стора
+
 
 export default store

@@ -1,7 +1,24 @@
-import {ActionsType, AddPostActionType, PostType, ProfilePageType, UpdateNewPostTextActionType} from "./store";
+export type PostType = {
+    id: number,
+    message: string,
+    likesCount: number
+}
+type ProfilePageType = {
+    posts: Array<PostType>
+    newPostText: string
+}
 
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+type UpdateNewMessageBody = { type: 'UPDATE_NEW_MESSAGE_BODY', newMessage: string }
+type AddNewMessage = { type: 'SEND_MESSAGE' }
+type AddPostActionType = {
+    type: 'ADD-POST'
+}
+type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+
+export type ActionsType = AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageBody | AddNewMessage
 
 const initialState = {
     posts: [
@@ -13,11 +30,10 @@ const initialState = {
     newPostText: ''
 }
 
-
 const profileReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
 
     switch (action.type) {
-        case ADD_POST:
+        case 'ADD-POST':
             const newPost: PostType = {
                 id: 5,
                 message: state.newPostText,
@@ -28,7 +44,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 
             return state
 
-        case UPDATE_NEW_POST_TEXT:
+        case 'UPDATE-NEW-POST-TEXT':
             state.newPostText = action.newText
             return state;
 
@@ -37,10 +53,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
     }
 }
 
-export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST} as const)
+export const addPostActionCreator = (): AddPostActionType => ({type: 'ADD-POST'} as const)
 export const updateNewPostTextActionCreator = (newText: string): UpdateNewPostTextActionType => {
     return {
-        type: UPDATE_NEW_POST_TEXT,
+        type: 'UPDATE-NEW-POST-TEXT',
         newText: newText
     } as const
 }
