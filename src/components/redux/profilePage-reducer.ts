@@ -8,8 +8,6 @@ type ProfilePageType = {
     newPostText: string
 }
 
-type UpdateNewMessageBody = { type: 'UPDATE_NEW_MESSAGE_BODY', newMessage: string }
-type AddNewMessage = { type: 'SEND_MESSAGE' }
 type AddPostActionType = {
     type: 'ADD-POST'
 }
@@ -18,7 +16,7 @@ type UpdateNewPostTextActionType = {
     newText: string
 }
 
-export type ActionsType = AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageBody | AddNewMessage
+export type ActionsType = AddPostActionType | UpdateNewPostTextActionType
 
 const initialState = {
     posts: [
@@ -33,6 +31,7 @@ const initialState = {
 const profileReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
 
     switch (action.type) {
+
         case 'ADD-POST':
             const newPost: PostType = {
                 id: 5,
