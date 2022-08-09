@@ -4,7 +4,7 @@ import {
     sendMessageCreator,
     updateNewMessageBodyCreator
 } from "../redux/dialogs-reducer";
-import {stateType, storeType} from "../redux/redux-store";
+import {stateType} from "../redux/redux-store";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";

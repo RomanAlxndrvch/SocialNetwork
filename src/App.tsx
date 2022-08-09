@@ -8,6 +8,7 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import Users from "./components/Users/Users.jsx";
 
 
 type DialogsType = {
@@ -59,6 +60,7 @@ function App(props: AppPropsType) {
                        render={() => <Profile/>}/>
                 <Route path={'/dialogs'}
                        render={() => <DialogsContainer/>}/>
+                <Route path={'/users'} render={() => <Users/>}/>
                 <Route exact path={'/News'} render={() => <News/>}/>
                 <Route exact path={'/Music'} render={() => <Music/>}/>
                 <Route exact path={'/Settings'} render={() => <Settings/>}/>
