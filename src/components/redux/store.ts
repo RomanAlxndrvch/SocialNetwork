@@ -1,3 +1,5 @@
+export {}
+
 import profileReducer from "./profilePage-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import navbarReducer from "./navbar-reducer";
@@ -56,7 +58,7 @@ type UpdateNewPostTextActionType = {
 type UpdateNewMessageBody = { type: 'UPDATE_NEW_MESSAGE_BODY', newMessage: string }
 type AddNewMessage = { type: 'SEND_MESSAGE' }
 type ActionsType = AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageBody | AddNewMessage
-
+/*
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -154,4 +156,5 @@ let store: StoreType = {
 }
 
 
-export default store
+
+export default store*/

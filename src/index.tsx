@@ -6,7 +6,7 @@ import {BrowserRouter} from "react-router-dom";
 import {RootStateType} from './components/redux/store'
 import store from './components/redux/redux-store'
 import {Provider} from "react-redux";
-import {sendMessageCreator} from "./components/redux/dialogs-reducer";
+import {sendMessageActionCreator} from "./components/redux/dialogs-reducer";
 
 
 /*

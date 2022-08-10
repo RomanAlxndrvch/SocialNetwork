@@ -1,7 +1,14 @@
-import {NavbarPageType} from "./store";
 import {ActionsType} from "./dialogs-reducer";
 
 export {}
+type FriendsType = {
+    id: number,
+    name: string,
+    avatar: string
+}
+export type NavbarPageType = {
+    friends: Array<FriendsType>
+}
 
 const initialState = {
     friends: [
