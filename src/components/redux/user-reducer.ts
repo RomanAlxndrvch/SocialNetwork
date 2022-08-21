@@ -1,8 +1,11 @@
 export type UserType = {
     id: number,
     followed: boolean,
-    fullName: string,
-    photo: string,
+    name: string,
+    photos: {
+        small: string,
+        large: string
+    },
     status: string,
     location: {
         city: string,
