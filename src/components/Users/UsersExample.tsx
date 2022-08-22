@@ -12,23 +12,22 @@ type UsersPropsType = {
     setUsers: (e: Array<UserType>) => void
 }
 
+const UsersE = (props: UsersPropsType) => {
 
-class Users extends React.Component<UsersPropsType, {}> {
-
-    constructor(props: UsersPropsType) {
-        super(props);
-
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            this.props.setUsers(response.data.items)
-        })
+    const getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+                props.setUsers(response.data.items)
+            })
+        }
     }
 
-    render() {
-        return (
-            <div>
-                {
-                    this.props.users.map(el =>
-                            <div key={el.id}>
+    return (
+        <div>
+            <button onClick={getUsers}>Get users</button>
+            {
+                props.users.map(el =>
+                    <div key={el.id}>
                     <span>
                         <div>
                                <img className={classes.photo}
@@ -39,17 +38,17 @@ class Users extends React.Component<UsersPropsType, {}> {
                             {
                                 el.followed ?
                                     <button onClick={() => {
-                                        this.props.unfollow(el.id)
+                                        props.unfollow(el.id)
                                     }}>Unfollow</button>
                                     :
                                     <button onClick={() => {
-                                        this.props.follow(el.id)
+                                        props.follow(el.id)
                                     }}>Follow</button>
                             }
                         </div>
                     </span>
 
-                                <span>
+                        <span>
                         <span>
                             <div>{el.name}</div>
                             <div>{el.status}</div>
@@ -59,13 +58,12 @@ class Users extends React.Component<UsersPropsType, {}> {
                             <div>{"el.location.city"}</div>
                         </span>
                     </span>
-                            </div>
-                    )
-                }
+                    </div>
+                )
+            }
 
-            </div>
-        );
-    }
+        </div>
+    )
 }
 
-export default Users
+export default UsersE
