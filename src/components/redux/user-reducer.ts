@@ -13,7 +13,10 @@ export type UserType = {
     }
 }
 export type UserPageType = {
-    users: Array<UserType>
+    users: Array<UserType>,
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage: number
 }
 
 type followActionCreatorType = {
@@ -35,14 +38,30 @@ type setUserActionCreatorType = {
         users: Array<UserType>
     }
 }
-
+type setCurrentPage = {
+    type: 'SET_CURRENT_PAGE',
+    payload: {
+        currentPage: number
+    }
+}
+type setTotalUsersCount = {
+    type: "SET_TOTAL_USERS_COUNT",
+    payload: {
+        totalUsersCount: number
+    }
+}
 type ActionCreator =
     followActionCreatorType |
     unfollowActionCreatorType |
-    setUserActionCreatorType
+    setUserActionCreatorType |
+    setCurrentPage |
+    setTotalUsersCount
 
 let InitialState = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
 
@@ -65,7 +84,15 @@ export const userReducer = (state: UserPageType = InitialState, action: ActionCr
 
         case "SET_USERS": {
             return {
-                ...state, users: [...state.users, ...action.payload.users]
+                ...state, users: action.payload.users
+            }
+        }
+        case "SET_CURRENT_PAGE": {
+            return {...state, currentPage: action.payload.currentPage}
+        }
+        case "SET_TOTAL_USERS_COUNT": {
+            return {
+                ...state, totalUsersCount: action.payload.totalUsersCount
             }
         }
 
@@ -101,6 +128,24 @@ export const setUsersAC = (users: Array<UserType>): setUserActionCreatorType => 
         }
     }
 
+}
+
+export const setCurrentPageAC = (currentPage: number): setCurrentPage => {
+    return {
+        type: "SET_CURRENT_PAGE",
+        payload: {
+            currentPage
+        }
+    }
+}
+
+export const setTotalUsersCountAC = (totalUsersCount: number): setTotalUsersCount => {
+    return {
+        type: "SET_TOTAL_USERS_COUNT",
+        payload: {
+            totalUsersCount
+        }
+    }
 }
 
 export default userReducer
