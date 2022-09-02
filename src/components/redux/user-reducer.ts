@@ -16,7 +16,8 @@ export type UserPageType = {
     users: Array<UserType>,
     pageSize: number,
     totalUsersCount: number,
-    currentPage: number
+    currentPage: number,
+    isFetching: boolean
 }
 
 type followActionCreatorType = {
@@ -50,18 +51,26 @@ type setTotalUsersCount = {
         totalUsersCount: number
     }
 }
+type toggleIsFetching = {
+    type: "TOGGLE_IS_FETCHING"
+    payload: {
+        isFetching: boolean
+    }
+}
 type ActionCreator =
     followActionCreatorType |
     unfollowActionCreatorType |
     setUserActionCreatorType |
     setCurrentPage |
-    setTotalUsersCount
+    setTotalUsersCount |
+    toggleIsFetching
 
 let InitialState = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 
@@ -90,6 +99,9 @@ export const userReducer = (state: UserPageType = InitialState, action: ActionCr
         }
         case "SET_TOTAL_USERS_COUNT": {
             return {...state, totalUsersCount: action.payload.totalUsersCount}
+        }
+        case "TOGGLE_IS_FETCHING": {
+            return {...state, isFetching: action.payload.isFetching}
         }
 
         default: {
@@ -140,6 +152,14 @@ export const setTotalUsersCountAC = (totalUsersCount: number): setTotalUsersCoun
         type: "SET_TOTAL_USERS_COUNT",
         payload: {
             totalUsersCount
+        }
+    }
+}
+export const toggleIsFetchingAC = (isFetching: boolean): toggleIsFetching => {
+    return {
+        type: "TOGGLE_IS_FETCHING",
+        payload: {
+            isFetching: isFetching
         }
     }
 }
