@@ -83,17 +83,13 @@ export const userReducer = (state: UserPageType = InitialState, action: ActionCr
         }
 
         case "SET_USERS": {
-            return {
-                ...state, users: action.payload.users
-            }
+            return {...state, users: action.payload.users}
         }
         case "SET_CURRENT_PAGE": {
             return {...state, currentPage: action.payload.currentPage}
         }
         case "SET_TOTAL_USERS_COUNT": {
-            return {
-                ...state, totalUsersCount: action.payload.totalUsersCount
-            }
+            return {...state, totalUsersCount: action.payload.totalUsersCount}
         }
 
         default: {
