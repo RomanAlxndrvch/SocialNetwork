@@ -3,50 +3,14 @@ import {Route} from "react-router-dom";
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Profile/Profile";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UserContainer from "./components/Users/UserContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
-type DialogsType = {
-    id: number,
-    name: string,
-    avatar: string
-}
-type PostsType = {
-    id: number,
-    message: string,
-    likesCount: number
-}
-type MessagesType = {
-    id: number,
-    message: string
-}
-type FriendsType = {
-    id: number,
-    name: string
-    avatar: string
-}
-type ProfilePageType = {
-    posts: Array<PostsType>
-    newPostText: string
-}
-type DialogsPageType = {
-    messages: Array<MessagesType>
-    dialogs: Array<DialogsType>
-    newMessageBody: string
-}
-type FriendsPageType = {
-    friends: Array<FriendsType>
-}
-type StatePropsType = {
-    profilePage: ProfilePageType,
-    dialogsPage: DialogsPageType,
-    sidebar: FriendsPageType
-}
 type AppPropsType = {}
 
 
@@ -57,7 +21,7 @@ function App(props: AppPropsType) {
             <Navbar/>
             <div className={'app-wrapper-content'}>
                 <Route path={'/profile'}
-                       render={() => <Profile/>}/>
+                       render={() => <ProfileContainer/>}/>
                 <Route path={'/dialogs'}
                        render={() => <DialogsContainer/>}/>
                 <Route path={'/users'} render={() => <UserContainer/>}/>

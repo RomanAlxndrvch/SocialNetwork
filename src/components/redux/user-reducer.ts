@@ -83,14 +83,12 @@ export const userReducer = (state: UserPageType = InitialState, action: ActionCr
                 )
             }
         }
-
         case "UNFOLLOW": {
             return {
                 ...state, users: state.users.map(el => el.id === action.payload.userId ? {...el, followed: false} : el
                 )
             }
         }
-
         case "SET_USERS": {
             return {...state, users: action.payload.users}
         }

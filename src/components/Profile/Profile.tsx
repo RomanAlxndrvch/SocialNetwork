@@ -1,27 +1,20 @@
 import React from "react";
 import classes from './Profile.module.css'
-import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {storeType} from "../redux/redux-store";
+import {PostType, ProfileType} from "../redux/profile-reducer";
 
-type PostType = {
-    id: number,
-    message: string,
-    likesCount: number
-}
-export type ProfileType = {
+
+export type ProfilePropsType = {
     posts: Array<PostType>
     newPostText: string
+    profile: ProfileType | null
+    setUserProfile: (profile: ProfileType) => void
 }
-
-type StatePropsType = {}
-
-const Profile: React.FC<StatePropsType> = (props) => {
+const Profile: React.FC<ProfilePropsType> = (props) => {
     return (
         <div>
-            <ProfileInfo/>
+            <ProfileInfo profile={props.profile}/>
             <MyPostsContainer/>
         </div>
     )

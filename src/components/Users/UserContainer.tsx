@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
 import {stateType} from "../redux/redux-store";
 import {
     follow,
@@ -81,38 +80,6 @@ const mapStateToProps = (state: stateType): MapStateToPropsType => {
     }
 }
 
-/*type MapDispatchPropsType = {
-    follow: (id: number) => void,
-    unfollow: (id: number) => void
-    setUsers: (users: Array<UserType>) => void
-    setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (totalUsersCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
-}*/
-/*const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId: number) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users: Array<UserType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUsersCount: (totalUsersCount: number) => {
-            dispatch(setTotalUsersCountAC(totalUsersCount))
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-
-
-    }
-}*/
 
 const UserContainer = connect(mapStateToProps, {
     follow,
