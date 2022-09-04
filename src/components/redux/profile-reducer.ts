@@ -22,14 +22,13 @@ export type ProfileType = {
         large: string | undefined,
         small: string | undefined
     },
-    userId: number | null
+    userId: number
 }
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     profile: ProfileType | null
 }
-
 export type AddPostActionType = {
     type: 'ADD-POST'
 }
@@ -43,7 +42,6 @@ export type SetUserProfileActionType = {
         profile: ProfileType
     }
 }
-
 export type ActionsType = AddPostActionType | UpdateNewPostTextActionType | SetUserProfileActionType
 
 const initialState: ProfilePageType = {
