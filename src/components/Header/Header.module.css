@@ -1,9 +1,14 @@
 
 .header {
     display: flex;
+    justify-content: space-between;
 
     grid-column: 1/-1;
     grid-row: 1/2;
     background: forestgreen;
+}
+
+.loginBlock a {
+    color: white;
 }
 
