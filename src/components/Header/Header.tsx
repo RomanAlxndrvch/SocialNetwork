@@ -9,7 +9,8 @@ const Header = (props: AuthPageType) => {
             <img src="https://static.rfstat.com/renderforest/images/v2/logo-homepage/flat_3.png" alt=""/>
 
             <div className={classes.loginBlock}>
-                <NavLink to={'/login'}>Login</NavLink>
+                {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
+
             </div>
         </header>
     )
