@@ -1,79 +1,94 @@
-import React from 'react';
+import React, {MouseEventHandler} from 'react';
 import classes from './Users.module.css';
 import userPhoto from '../../assets/images/149071.png';
-import { UserType } from '../redux/user-reducer';
-import { NavLink } from 'react-router-dom';
+import {UserType} from '../redux/user-reducer';
+import {NavLink} from 'react-router-dom';
+import axios from "axios";
 
 type UsersPropsType = {
-  users: Array<UserType>;
-  follow: (id: number) => void;
-  unfollow: (id: number) => void;
-  pageSize: number;
-  totalUsersCount: number;
-  currentPage: number;
-  onPageChanged: (pageNumber: number) => void;
+    users: Array<UserType>;
+    follow: (id: number) => void;
+    unfollow: (id: number) => void;
+    pageSize: number;
+    totalUsersCount: number;
+    currentPage: number;
+    onPageChanged: (pageNumber: number) => void;
 };
 
 export const Users = (props: UsersPropsType) => {
-  let pagesCount = Math.ceil(
-    (props.totalUsersCount > 54 ? 54 : props.totalUsersCount) / props.pageSize
-  );
+    let pagesCount = Math.ceil(
+        (props.totalUsersCount > 54 ? 54 : props.totalUsersCount) / props.pageSize
+    );
 
-  let pages: Array<number> = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    pages = [...pages, i];
-  }
+    let pages: Array<number> = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages = [...pages, i];
+    }
 
-  return (
-    <div>
-      <div>
-        {pages.map((el) => {
-          return (
-            <span
-              key={el}
-              onClick={() => {
-                props.onPageChanged(el);
-              }}
-              className={props.currentPage === el ? classes.selectedPage : ''}
-            >
+    const unfollowBtnHandler = (id: number) => {
+        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
+            withCredentials: true,
+            headers: {'API-KEY': '8fc044d8-3f5e-469a-b681-136f15cb55d0'}
+        }).then(response => {
+            if (response.data.resultCode === 0) {
+                props.unfollow(id)
+            }
+        })
+    }
+
+    const followBtnHandler = (id: number) => {
+        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
+            withCredentials: true,
+            headers: {'API-KEY': '8fc044d8-3f5e-469a-b681-136f15cb55d0'}
+        }).then(response => {
+            if (response.data.resultCode === 0) {
+                props.follow(id)
+            }
+        })
+    }
+
+    return (
+        <div>
+            <div>
+                {pages.map((el) => {
+                    return (
+                        <span
+                            key={el}
+                            onClick={() => {
+                                props.onPageChanged(el);
+                            }}
+                            className={props.currentPage === el ? classes.selectedPage : ''}
+                        >
               {el}{' '}
             </span>
-          );
-        })}
-      </div>
-      {props.users.map((el) => (
-        <div key={el.id}>
+                    );
+                })}
+            </div>
+            {props.users.map((el) => (
+                <div key={el.id}>
           <span>
             <div>
               <NavLink to={'/profile/' + el.id}>
                 <img
-                  className={classes.photo}
-                  src={el.photos.small !== null ? el.photos.small : userPhoto}
-                  alt={'photo'}
+                    className={classes.photo}
+                    src={el.photos.small !== null ? el.photos.small : userPhoto}
+                    alt={'photo'}
                 />
               </NavLink>
             </div>
             <div>
               {el.followed ? (
-                <button
-                  onClick={() => {
-                    props.unfollow(el.id);
-                  }}
-                >
-                  Unfollow
-                </button>
-              ) : (
-                <button
-                  onClick={() => {
-                    props.follow(el.id);
-                  }}
-                >
-                  Follow
-                </button>
-              )}
+                      <button onClick={() => unfollowBtnHandler(el.id)}
+                      >Unfollow</button>) :
+                  (<button onClick={() => {
+                          followBtnHandler(el.id);
+                      }}>
+                          Follow
+                      </button>
+                  )}
             </div>
           </span>
-          <span>
+                    <span>
             <span>
               <div>{el.name}</div>
               <div>{el.status}</div>
@@ -83,8 +98,8 @@ export const Users = (props: UsersPropsType) => {
               <div>{'el.location.city'}</div>
             </span>
           </span>
+                </div>
+            ))}
         </div>
-      ))}
-    </div>
-  );
+    );
 };
