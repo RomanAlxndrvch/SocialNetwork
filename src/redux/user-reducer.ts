@@ -17,7 +17,8 @@ export type UserPageType = {
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
-    isFetching: boolean
+    isFetching: boolean,
+    followingInProgress: Array<number>
 }
 
 type followActionCreatorType = {
@@ -57,20 +58,29 @@ type toggleIsFetching = {
         isFetching: boolean
     }
 }
+type toggleIsFollowingInProgress = {
+    type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+    payload: {
+        isFetching: boolean
+        userId: number
+    }
+}
 type ActionCreator =
     followActionCreatorType |
     unfollowActionCreatorType |
     setUserActionCreatorType |
     setCurrentPage |
     setTotalUsersCount |
-    toggleIsFetching
+    toggleIsFetching |
+    toggleIsFollowingInProgress
 
 let InitialState = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: []
 }
 
 
@@ -101,6 +111,14 @@ export const userReducer = (state: UserPageType = InitialState, action: ActionCr
         case "TOGGLE_IS_FETCHING": {
             return {...state, isFetching: action.payload.isFetching}
         }
+        case "TOGGLE_IS_FOLLOWING_PROGRESS": {
+            return {
+                ...state,
+                followingInProgress: action.payload.isFetching ?
+                    [...state.followingInProgress, action.payload.userId] :
+                    state.followingInProgress.filter(el => el !== action.payload.userId)
+            }
+        }
 
         default: {
             return state
@@ -116,7 +134,6 @@ export const follow = (userId: number): followActionCreatorType => {
         }
     } as const
 }
-
 export const unfollow = (userId: number): unfollowActionCreatorType => {
     return {
         type: 'UNFOLLOW',
@@ -125,7 +142,6 @@ export const unfollow = (userId: number): unfollowActionCreatorType => {
         }
     } as const
 }
-
 export const setUsers = (users: Array<UserType>): setUserActionCreatorType => {
     return {
         type: "SET_USERS",
@@ -135,7 +151,6 @@ export const setUsers = (users: Array<UserType>): setUserActionCreatorType => {
     }
 
 }
-
 export const setCurrentPage = (currentPage: number): setCurrentPage => {
     return {
         type: "SET_CURRENT_PAGE",
@@ -144,7 +159,6 @@ export const setCurrentPage = (currentPage: number): setCurrentPage => {
         }
     }
 }
-
 export const setTotalUsersCount = (totalUsersCount: number): setTotalUsersCount => {
     return {
         type: "SET_TOTAL_USERS_COUNT",
@@ -158,6 +172,16 @@ export const toggleIsFetching = (isFetching: boolean): toggleIsFetching => {
         type: "TOGGLE_IS_FETCHING",
         payload: {
             isFetching: isFetching
+        }
+    }
+}
+export const toggleFollowingInProgress = (isFetching: boolean, userId: number): toggleIsFollowingInProgress => {
+    return {
+        type: "TOGGLE_IS_FOLLOWING_PROGRESS",
+        payload: {
+            isFetching,
+            userId
+
         }
     }
 }

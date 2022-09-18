@@ -5,7 +5,7 @@ import {
     follow,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers, toggleIsFetching,
+    setUsers, toggleFollowingInProgress, toggleIsFetching,
     unfollow,
     UserType
 } from "../../redux/user-reducer";
@@ -25,8 +25,10 @@ type UsersPropsAPICompType = {
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
-    isFetching: boolean
+    isFetching: boolean,
     toggleIsFetching: (isFetching: boolean) => void
+    toggleFollowingInProgress: (isFetching: boolean, userId: number) => void
+    followingInProgress: Array<number>
 }
 
 class UsersContainer extends React.Component<UsersPropsAPICompType, {}> {
@@ -59,6 +61,8 @@ class UsersContainer extends React.Component<UsersPropsAPICompType, {}> {
                             users={this.props.users}
                             follow={this.props.follow}
                             unfollow={this.props.unfollow}
+                            toggleFollowingInProgress={this.props.toggleFollowingInProgress}
+                            followingInProgress={this.props.followingInProgress}
                 /></div>
             </>
         );
@@ -71,6 +75,7 @@ type MapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 const mapStateToProps = (state: stateType): MapStateToPropsType => {
     return {
@@ -78,7 +83,8 @@ const mapStateToProps = (state: stateType): MapStateToPropsType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
@@ -89,7 +95,8 @@ const UserContainer = connect(mapStateToProps, {
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
-    toggleIsFetching
+    toggleIsFetching,
+    toggleFollowingInProgress
 })(UsersContainer)
 
 export default UserContainer

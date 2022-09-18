@@ -13,6 +13,8 @@ type UsersPropsType = {
     totalUsersCount: number;
     currentPage: number;
     onPageChanged: (pageNumber: number) => void;
+    toggleFollowingInProgress: (isFetching: boolean, userId: number) => void
+    followingInProgress: Array<number>
 };
 
 export const Users = (props: UsersPropsType) => {
@@ -26,6 +28,7 @@ export const Users = (props: UsersPropsType) => {
     }
 
     const unfollowBtnHandler = (id: number) => {
+        props.toggleFollowingInProgress(true, id)
         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
             withCredentials: true,
             headers: {'API-KEY': '8fc044d8-3f5e-469a-b681-136f15cb55d0'}
@@ -33,10 +36,12 @@ export const Users = (props: UsersPropsType) => {
             if (response.data.resultCode === 0) {
                 props.unfollow(id)
             }
+            props.toggleFollowingInProgress(false, id)
         })
     }
 
     const followBtnHandler = (id: number) => {
+        props.toggleFollowingInProgress(true, id)
         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
             withCredentials: true,
             headers: {'API-KEY': '8fc044d8-3f5e-469a-b681-136f15cb55d0'}
@@ -44,6 +49,7 @@ export const Users = (props: UsersPropsType) => {
             if (response.data.resultCode === 0) {
                 props.follow(id)
             }
+            props.toggleFollowingInProgress(false, id)
         })
     }
 
@@ -78,9 +84,10 @@ export const Users = (props: UsersPropsType) => {
             </div>
             <div>
               {el.followed ? (
-                      <button onClick={() => unfollowBtnHandler(el.id)}
+                      <button disabled={props.followingInProgress.some(id => id === el.id)}
+                              onClick={() => unfollowBtnHandler(el.id)}
                       >Unfollow</button>) :
-                  (<button onClick={() => {
+                  (<button disabled={props.followingInProgress.some(id => id === el.id)} onClick={() => {
                           followBtnHandler(el.id);
                       }}>
                           Follow
