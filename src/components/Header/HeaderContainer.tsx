@@ -1,9 +1,9 @@
 import React from "react";
 import Header from "./Header";
 import axios from "axios";
-import {AuthPageType, SetAuthUserDataAC} from "../redux/auth-reducer";
+import {AuthPageType, SetAuthUserDataAC} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
-import {stateType} from "../redux/redux-store";
+import {stateType} from "../../redux/redux-store";
 
 
 type HeaderContainerPropsType = {

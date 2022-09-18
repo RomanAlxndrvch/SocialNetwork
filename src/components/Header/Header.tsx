@@ -1,7 +1,7 @@
 import React from "react";
 import classes from './Header.module.css'
 import {NavLink} from "react-router-dom";
-import {AuthPageType} from "../redux/auth-reducer";
+import {AuthPageType} from "../../redux/auth-reducer";
 
 const Header = (props: AuthPageType) => {
     return (

@@ -1,5 +1,5 @@
 import React, {MouseEventHandler} from "react";
-import {UserType} from "../redux/user-reducer";
+import {UserType} from "../../redux/user-reducer";
 import classes from './Users.module.css'
 import axios from "axios";
 import userPhoto from '../../assets/images/149071.png'

@@ -1,7 +1,7 @@
 import React, {MouseEventHandler} from 'react';
 import classes from './Users.module.css';
 import userPhoto from '../../assets/images/149071.png';
-import {UserType} from '../redux/user-reducer';
+import {UserType} from '../../redux/user-reducer';
 import {NavLink} from 'react-router-dom';
 import axios from "axios";
 
