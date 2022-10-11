@@ -1,9 +1,10 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import navbarReducer from "./navbar-reducer";
 import userReducer from "./user-reducer";
 import authReducer from "./auth-reducer";
+import thunk from "redux-thunk"
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -13,10 +14,11 @@ let rootReducer = combineReducers({
     auth: authReducer
 })
 
-let store = createStore(rootReducer)
+let store = createStore(rootReducer, applyMiddleware(thunk))
 
 export type stateType = ReturnType<typeof rootReducer> // типизация того,что наш стор вернет
 export type storeType = typeof store // типизация самого стора
+export type dispatchType = typeof store.dispatch
 
 declare global {
     interface Window {

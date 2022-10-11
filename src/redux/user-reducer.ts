@@ -1,3 +1,6 @@
+import {usersAPI} from "../api/api";
+import {dispatchType} from "./redux-store";
+
 export type UserType = {
     id: number,
     followed: boolean,
@@ -184,6 +187,17 @@ export const toggleFollowingInProgress = (isFetching: boolean, userId: number): 
 
         }
     }
+}
+
+
+export const getUsers = (currentPage: number, pageSize: number) => (dispatch: dispatchType) => {
+    dispatch(toggleIsFetching(true))
+
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(toggleIsFetching(false))
+        dispatch(setUsers(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
+    })
 }
 
 export default userReducer
