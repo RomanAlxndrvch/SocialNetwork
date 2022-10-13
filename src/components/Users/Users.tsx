@@ -4,6 +4,7 @@ import userPhoto from '../../assets/images/149071.png';
 import {UserType} from '../../redux/user-reducer';
 import {NavLink} from 'react-router-dom';
 import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     users: Array<UserType>;
@@ -25,32 +26,6 @@ export const Users = (props: UsersPropsType) => {
     let pages: Array<number> = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages = [...pages, i];
-    }
-
-    const unfollowBtnHandler = (id: number) => {
-        props.toggleFollowingInProgress(true, id)
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
-            withCredentials: true,
-            headers: {'API-KEY': '8fc044d8-3f5e-469a-b681-136f15cb55d0'}
-        }).then(response => {
-            if (response.data.resultCode === 0) {
-                props.unfollow(id)
-            }
-            props.toggleFollowingInProgress(false, id)
-        })
-    }
-
-    const followBtnHandler = (id: number) => {
-        props.toggleFollowingInProgress(true, id)
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
-            withCredentials: true,
-            headers: {'API-KEY': '8fc044d8-3f5e-469a-b681-136f15cb55d0'}
-        }).then(response => {
-            if (response.data.resultCode === 0) {
-                props.follow(id)
-            }
-            props.toggleFollowingInProgress(false, id)
-        })
     }
 
     return (
@@ -85,10 +60,10 @@ export const Users = (props: UsersPropsType) => {
             <div>
               {el.followed ? (
                       <button disabled={props.followingInProgress.some(id => id === el.id)}
-                              onClick={() => unfollowBtnHandler(el.id)}
+                              onClick={() => props.unfollow(el.id)}
                       >Unfollow</button>) :
                   (<button disabled={props.followingInProgress.some(id => id === el.id)} onClick={() => {
-                          followBtnHandler(el.id);
+                          props.follow(el.id);
                       }}>
                           Follow
                       </button>

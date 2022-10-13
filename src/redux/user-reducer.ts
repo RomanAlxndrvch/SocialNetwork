@@ -129,7 +129,7 @@ export const userReducer = (state: UserPageType = InitialState, action: ActionCr
     }
 }
 
-export const follow = (userId: number): followActionCreatorType => {
+export const followSuccess = (userId: number): followActionCreatorType => {
     return {
         type: "FOLLOW",
         payload: {
@@ -137,7 +137,7 @@ export const follow = (userId: number): followActionCreatorType => {
         }
     } as const
 }
-export const unfollow = (userId: number): unfollowActionCreatorType => {
+export const unfollowSuccess = (userId: number): unfollowActionCreatorType => {
     return {
         type: 'UNFOLLOW',
         payload: {
@@ -189,14 +189,32 @@ export const toggleFollowingInProgress = (isFetching: boolean, userId: number): 
     }
 }
 
-
 export const getUsers = (currentPage: number, pageSize: number) => (dispatch: dispatchType) => {
     dispatch(toggleIsFetching(true))
 
     usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(setCurrentPage(currentPage))
         dispatch(toggleIsFetching(false))
         dispatch(setUsers(data.items))
         dispatch(setTotalUsersCount(data.totalCount))
+    })
+}
+export const follow = (id: number) => (dispatch: dispatchType) => {
+    dispatch(toggleFollowingInProgress(true, id))
+    usersAPI.follow(id).then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(followSuccess(id))
+        }
+        dispatch(toggleFollowingInProgress(false, id))
+    })
+}
+export const unfollow = (id: number) => (dispatch: dispatchType) => {
+    dispatch(toggleFollowingInProgress(true, id))
+    usersAPI.unfollow(id).then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(unfollowSuccess(id))
+        }
+        dispatch(toggleFollowingInProgress(false, id))
     })
 }
 
