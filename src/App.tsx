@@ -10,6 +10,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UserContainer from "./components/Users/UserContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderCont from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 
 type AppPropsType = {}
@@ -29,6 +30,7 @@ function App(props: AppPropsType) {
                 <Route exact path={'/News'} render={() => <News/>}/>
                 <Route exact path={'/Music'} render={() => <Music/>}/>
                 <Route exact path={'/Settings'} render={() => <Settings/>}/>
+                <Route exact path={'/Login'} render={() => <Login/>}/>
             </div>
         </div>
 
