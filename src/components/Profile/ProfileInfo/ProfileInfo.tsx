@@ -3,6 +3,8 @@ import classes from "./ProfileInfo.module.css";
 import {ProfileType} from "../../../redux/profile-reducer";
 import {Preloader} from "../../common/Preloader/Preloader";
 import avatar from './../../../assets/images/149071.png'
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
+
 
 type ProfileInfoPropsType = { profile: ProfileType | null }
 
@@ -13,11 +15,11 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
     else {
         return (
             <div>
-                <div>
+                {/*  <div>
                     <img
                         src="https://images.ctfassets.net/hrltx12pl8hq/4f6DfV5DbqaQUSw0uo0mWi/6fbcf889bdef65c5b92ffee86b13fc44/shutterstock_376532611.jpg?fit=fill&w=800&h=300"
                         alt=""/>
-                </div>
+                </div>*/}
 
                 <div className={classes.descriptionBlock}>
                     <img
@@ -25,6 +27,9 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                 </div>
                 <div>
                     {props.profile.fullName}
+                </div>
+                <div>
+                    <ProfileStatus status={'Hello my friends'}/>
                 </div>
             </div>
         )

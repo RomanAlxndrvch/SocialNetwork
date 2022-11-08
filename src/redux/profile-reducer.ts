@@ -69,7 +69,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
             return {...state, posts: [...state.posts, newPost], newPostText: ''}
 
         case 'UPDATE-NEW-POST-TEXT':
-            state.newPostText = action.newText
+            // state.newPostText = action.newText
             return {...state, newPostText: action.newText};
 
         case "SET_USER_PROFILE":

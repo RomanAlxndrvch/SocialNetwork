@@ -43,8 +43,4 @@ export default compose<React.ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
 )(Dialogs)
 
-/*
- WithAuthRedirect(connect
-(mapStateToProps, mapDispatchToProps)(Dialogs))
 
-*/
