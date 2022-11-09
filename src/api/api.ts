@@ -20,7 +20,17 @@ export const usersAPI = {
         return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
     },
     getProfile(userId: string) {
+        console.warn('Old method. Please use ProfileAPO object')
+        return profileAPI.getProfile(userId)
+    }
+}
+
+export const profileAPI = {
+    getProfile(userId: string) {
         return instance.get(`profile/${userId}`)
+    },
+    getStatus(userId: number) {
+        instance.get(`/profile/status/${userId}`)
     }
 }
 
