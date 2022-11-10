@@ -6,7 +6,6 @@ type UpdateStatusResponseType<D> = {
     data: D
 }
 
-
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -39,7 +38,7 @@ export const profileAPI = {
         return instance.get<string>(`/profile/status/${userId}`)
     },
     updateStatus(status: string) {
-        return instance.put('/profile/status', {status: status})
+        return instance.put<UpdateStatusResponseType<{}>>('/profile/status', {status: status})
     }
 }
 

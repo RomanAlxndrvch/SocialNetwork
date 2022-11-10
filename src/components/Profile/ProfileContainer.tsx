@@ -20,7 +20,7 @@ type ProfileContainerPropsType = {
     status: string
     setUserProfile: (profile: ProfileType) => void
     getUserProfile: (userId: string) => void
-    getUserStatus: (userId: string) => void
+    getStatus: (userId: string) => void
     updateStatus: (status: string) => void
     profile: ProfileType | null
 }
@@ -40,7 +40,7 @@ class ProfileContainer extends React.Component<DataContainerComponentType> {
         let userId = this.props.match.params.userId
         if (!userId) userId = '25295'
         this.props.getUserProfile(userId)
-        this.props.getUserStatus(userId)
+        this.props.getStatus(userId)
     }
 
     render() {
