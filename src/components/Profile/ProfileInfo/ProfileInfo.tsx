@@ -6,9 +6,14 @@ import avatar from './../../../assets/images/149071.png'
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 
-type ProfileInfoPropsType = { profile: ProfileType | null }
+type ProfileInfoPropsType = {
+    profile: ProfileType | null
+    status: string
+    updateStatus: (status: string) => void
+}
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
+
     if (!props.profile) {
         return <Preloader/>
     }
@@ -29,7 +34,8 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                     {props.profile.fullName}
                 </div>
                 <div>
-                    <ProfileStatus status={'Hello my friends'}/>
+                    <ProfileStatus updateStatus={props.updateStatus}
+                                   status={props.status === null ? 'Enter Status' : props.status}/>
                 </div>
             </div>
         )

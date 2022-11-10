@@ -1,5 +1,11 @@
 import axios from "axios";
 
+type UpdateStatusResponseType<D> = {
+    resultCode: number
+    messages: Array<string>,
+    data: D
+}
+
 
 const instance = axios.create({
     withCredentials: true,
@@ -29,8 +35,11 @@ export const profileAPI = {
     getProfile(userId: string) {
         return instance.get(`profile/${userId}`)
     },
-    getStatus(userId: number) {
-        instance.get(`/profile/status/${userId}`)
+    getStatus(userId: string) {
+        return instance.get<string>(`/profile/status/${userId}`)
+    },
+    updateStatus(status: string) {
+        return instance.put('/profile/status', {status: status})
     }
 }
 
