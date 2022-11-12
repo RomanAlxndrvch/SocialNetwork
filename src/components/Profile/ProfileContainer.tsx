@@ -57,12 +57,6 @@ const mapStateToProps = (state: stateType): mapStateToPropsType => ({
     status: state.profilePage.status
 })
 
-/*
-connect(mapStateToProps, {
-    setUserProfile, getUserProfile, getUserStatus
-})
-*/
-
 export default compose<React.ComponentType>(
     WithAuthRedirect,
     connect(mapStateToProps, {
