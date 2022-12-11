@@ -8,7 +8,6 @@ import {Redirect} from "react-router-dom";
 
 export type ProfilePropsType = {
     posts: Array<PostType>
-    newPostText: string
     profile: ProfileType | null
     status: string
     setUserProfile: (profile: ProfileType) => void

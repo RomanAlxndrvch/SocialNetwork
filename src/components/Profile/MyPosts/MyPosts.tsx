@@ -11,21 +11,15 @@ type PostsType = {
 type ProfilePageType = {
     posts: Array<PostsType>
     addPost: (newPost: string) => void
-    onPostChange: (e: string) => void
-    newPostText: string
 }
 
 const MyPosts = (props: ProfilePageType) => {
     const postElements = props.posts.map((post, index) => <Post key={index} message={post.message}
                                                                 likesCount={post.likesCount}/>)
 
-    /*  const newPostElement = React.createRef<HTMLTextAreaElement>();*/
-
     const onAddPost = (formData: ProfileFormTexType) => {
+        console.log(formData)
         props.addPost(formData.newPost)
-    }
-    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.onPostChange((e.currentTarget.value))
     }
 
     return (

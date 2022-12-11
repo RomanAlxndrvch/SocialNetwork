@@ -29,7 +29,6 @@ type PathParamsType = {
 }
 type mapStateToPropsType = {
     posts: Array<PostType>
-    newPostText: string
     profile: ProfileType | null
     status: string
 }
@@ -52,7 +51,6 @@ class ProfileContainer extends React.Component<DataContainerComponentType> {
 
 const mapStateToProps = (state: stateType): mapStateToPropsType => ({
     posts: state.profilePage.posts,
-    newPostText: state.profilePage.newPostText,
     profile: state.profilePage.profile,
     status: state.profilePage.status
 })

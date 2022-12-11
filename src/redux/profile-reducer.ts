@@ -29,17 +29,12 @@ export type ProfileType = {
 }
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string
     profile: ProfileType | null
     status: string
 }
 export type AddPostActionType = {
     type: 'ADD-POST'
     newPost: string
-}
-export type UpdateNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
 }
 export type SetUserProfileActionType = {
     type: 'SET_USER_PROFILE',
@@ -55,7 +50,6 @@ export type getUserStatusActionType = {
 }
 export type ActionsType =
     AddPostActionType
-    | UpdateNewPostTextActionType
     | SetUserProfileActionType
     | getUserStatusActionType
 
@@ -66,7 +60,6 @@ const initialState: ProfilePageType = {
         {id: 3, message: "Darova.", likesCount: 13},
         {id: 4, message: "LaLaLaLa.", likesCount: 14},
     ],
-    newPostText: '',
     profile: null,
     status: ''
 }
@@ -79,13 +72,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
                 message: action.newPost,
                 likesCount: 0
             }
-            return {...state, posts: [...state.posts, newPost], newPostText: ''}
+            return {...state, posts: [newPost, ...state.posts]}
 
         case'SET_STATUS':
             return {...state, status: action.payload.status}
-
-        case 'UPDATE-NEW-POST-TEXT':
-            return {...state, newPostText: action.newText};
 
         case "SET_USER_PROFILE":
             return {...state, profile: action.payload.profile}
@@ -96,12 +86,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 }
 
 export const addPostActionCreator = (newPost: string): AddPostActionType => ({type: 'ADD-POST', newPost} as const)
-export const updateNewPostTextActionCreator = (newText: string): UpdateNewPostTextActionType => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
-    } as const
-}
+
 export const setUserProfile = (profile: ProfileType): SetUserProfileActionType => {
     return {
         type: "SET_USER_PROFILE",

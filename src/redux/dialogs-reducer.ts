@@ -10,7 +10,6 @@ export type DialogType = {
 export type DialogsPageType = {
     messages: Array<MessageType>
     dialogs: Array<DialogType>
-    newMessageBody: string
 }
 
 export type AddPostActionType = {
@@ -20,9 +19,9 @@ export type UpdateNewPostTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newText: string
 }
-export type UpdateNewMessageBody = { type: 'UPDATE_NEW_MESSAGE_BODY', newMessage: string }
-export type AddNewMessage = { type: 'SEND_MESSAGE' }
-export type ActionsType = AddPostActionType | UpdateNewPostTextActionType | UpdateNewMessageBody | AddNewMessage
+
+export type AddNewMessage = { type: 'SEND_MESSAGE', newMessage: string }
+export type ActionsType = AddPostActionType | UpdateNewPostTextActionType | AddNewMessage
 
 let initialState: DialogsPageType =
     {
@@ -65,32 +64,22 @@ let initialState: DialogsPageType =
                 avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcfJW5O8sjIwR9qwtci0d8yKu9yuflD-RreQnrkpQS9JGwqkJJRukoamCV4PV5BEqtS3o&usqp=CAU'
             }
         ],
-        newMessageBody: '',
     }
 
 const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType): DialogsPageType => {
     switch (action.type) {
 
-        case 'UPDATE_NEW_MESSAGE_BODY':
-            return {...state, newMessageBody: action.newMessage}
-
         case 'SEND_MESSAGE':
-            const newMessage: MessageType = {id: 1234, message: state.newMessageBody}
-            return {...state, messages: [...state.messages, newMessage], newMessageBody: ''}
+            const newMessage: MessageType = {id: 1234, message: action.newMessage}
+            return {...state, messages: [...state.messages, newMessage]}
 
         default:
             return state
     }
 }
 
-export const updateNewMessageBodyActionCreator = (newMessage: string): UpdateNewMessageBody => ({
-        type: 'UPDATE_NEW_MESSAGE_BODY',
-        newMessage
-    } as const
-)
-
-export const sendMessageActionCreator = (): AddNewMessage => (
-    {type: 'SEND_MESSAGE'} as const)
+export const sendMessageActionCreator = (newMessage: string): AddNewMessage => (
+    {type: 'SEND_MESSAGE', newMessage} as const)
 
 export default dialogsReducer
 
