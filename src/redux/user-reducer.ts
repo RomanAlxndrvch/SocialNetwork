@@ -68,7 +68,7 @@ type toggleIsFollowingInProgress = {
         userId: number
     }
 }
-type ActionCreator =
+export type UserActionCreatorType =
     followActionCreatorType |
     unfollowActionCreatorType |
     setUserActionCreatorType |
@@ -87,7 +87,7 @@ let InitialState = {
 }
 
 
-export const userReducer = (state: UserPageType = InitialState, action: ActionCreator): UserPageType => {
+export const userReducer = (state: UserPageType = InitialState, action: UserActionCreatorType): UserPageType => {
     switch (action.type) {
 
         case "FOLLOW": {

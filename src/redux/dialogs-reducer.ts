@@ -21,7 +21,7 @@ export type UpdateNewPostTextActionType = {
 }
 
 export type AddNewMessage = { type: 'SEND_MESSAGE', newMessage: string }
-export type ActionsType = AddPostActionType | UpdateNewPostTextActionType | AddNewMessage
+export type DialogActionsCreatorsType = AddPostActionType | UpdateNewPostTextActionType | AddNewMessage
 
 let initialState: DialogsPageType =
     {
@@ -66,7 +66,7 @@ let initialState: DialogsPageType =
         ],
     }
 
-const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType): DialogsPageType => {
+const dialogsReducer = (state: DialogsPageType = initialState, action: DialogActionsCreatorsType): DialogsPageType => {
     switch (action.type) {
 
         case 'SEND_MESSAGE':

@@ -7,9 +7,9 @@ import {stateType} from "../../redux/redux-store";
 
 type HeaderContainerPropsType = {
     getAuthUserData: () => void
-    userId: number
-    email: string
-    login: string
+    userId: number | null
+    email: string | null
+    login: string | null
     isAuth: boolean
 }
 

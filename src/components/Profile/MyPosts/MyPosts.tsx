@@ -3,7 +3,7 @@ import classes from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, requiredFields} from "../../utils/validators/validators";
-import FormsControls from "../../common/FormsControls/FormsControls";
+import Textarea from "../../common/FormsControls/Textarea";
 
 type PostsType = {
     id: number,
@@ -50,7 +50,7 @@ const ProfileTextForm = (props: InjectedFormProps<ProfileFormTexType>) => {
         <form onSubmit={props.handleSubmit}>
             <Field validate={[requiredFields, letMaxLength10]}
                    placeholder={'New Post'}
-                   component={FormsControls}
+                   component={Textarea}
                    name={'newPost'}></Field>
             <button>Add Post!</button>
         </form>

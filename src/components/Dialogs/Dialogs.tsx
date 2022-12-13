@@ -6,6 +6,8 @@ import {DialogsPageType, DialogType, MessageType} from "../../redux/dialogs-redu
 import {Redirect} from "react-router-dom";
 import Login from "../Login/Login";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import Textarea from "../common/FormsControls/Textarea";
+import {maxLengthCreator, requiredFields} from "../utils/validators/validators";
 
 type StatePropsType = {
     dialogsPage: DialogsPageType
@@ -54,11 +56,16 @@ type AdMessageFormType = {
     newMessage: string
 }
 
+const maxLength40 = maxLengthCreator(40)
 const AddMessageForm = (props: InjectedFormProps<AdMessageFormType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Enter your message'} component={'textarea'} name={'newMessage'}/>
+                <Field
+                    validate={[requiredFields, maxLength40]}
+                    placeholder={'Enter your message'}
+                    component={Textarea}
+                    name={'newMessage'}/>
             </div>
 
             <button>

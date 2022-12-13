@@ -1,8 +1,12 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Input} from "../common/FormsControls/Textarea";
+import {requiredFields} from "../utils/validators/validators";
+import {connect} from "react-redux";
+import {login} from "../../redux/auth-reducer";
 
 type formDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
@@ -11,14 +15,19 @@ const LoginForm = (props: InjectedFormProps<formDataType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Login'} component={'input'} name={'login'}/>
+                <Field validate={[requiredFields]} placeholder={'Email'} component={Input}
+                    // 77 lessen 40:00
+                       name={'email'}/>
             </div>
             <div>
-                <Field placeholder={'Password'} component={'input'} name={'password'}/>
+                <Field validate={[requiredFields]} placeholder={'Password'} component={Input}
+                    // 77 lessen 40:00
+                       name={'password'}/>
             </div>
 
             <div>
-                <Field component={'input'} type="checkbox" placeholder={'Checkbox'} name={'rememberMe'}/> Remember Me
+
+                <Field component={Input} type="checkbox" placeholder={'Checkbox'} name={'rememberMe'}/> Remember Me
             </div>
             <div>
                 <button>
@@ -31,10 +40,13 @@ const LoginForm = (props: InjectedFormProps<formDataType>) => {
 
 const ReduxLoginForm = reduxForm<formDataType>({form: 'login'})(LoginForm)
 
-const Login = () => {
+type LoginPropsType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+}
+const Login = (props: LoginPropsType) => {
 
     const onSubmit = (formData: formDataType) => {
-        console.log(formData)
+        props.login(formData.email, formData.password, formData.rememberMe)
     }
     return (
         <div>
@@ -45,4 +57,4 @@ const Login = () => {
 }
 
 
-export default Login
+export default connect(null, {login})(Login)

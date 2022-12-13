@@ -1,4 +1,4 @@
-import {ActionsType} from "./dialogs-reducer";
+import {DialogActionsCreatorsType} from "./dialogs-reducer";
 
 export {}
 type FriendsType = {
@@ -30,7 +30,7 @@ const initialState = {
     ]
 }
 
-const navbarReducer = (state: NavbarPageType = initialState, action: ActionsType) => {
+const navbarReducer = (state: NavbarPageType = initialState, action: DialogActionsCreatorsType) => {
     return state
 }
 
