@@ -3,7 +3,9 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/FormsControls/Textarea";
 import {requiredFields} from "../utils/validators/validators";
 import {connect} from "react-redux";
-import {login} from "../../redux/auth-reducer";
+import {AuthPageType, login} from "../../redux/auth-reducer";
+import {stateType} from "../../redux/redux-store";
+import {Redirect} from "react-router-dom";
 
 type formDataType = {
     email: string
@@ -42,12 +44,17 @@ const ReduxLoginForm = reduxForm<formDataType>({form: 'login'})(LoginForm)
 
 type LoginPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
+    isAuth: boolean
 }
 const Login = (props: LoginPropsType) => {
 
     const onSubmit = (formData: formDataType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }
+    if (props.isAuth) {
+        return <Redirect to={'/profile'}/>
+    }
+
     return (
         <div>
             <h1>Login</h1>
@@ -56,5 +63,9 @@ const Login = (props: LoginPropsType) => {
     )
 }
 
-
-export default connect(null, {login})(Login)
+const mapStateToProps = (state: stateType): { isAuth: boolean } => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+export default connect(mapStateToProps, {login})(Login)
