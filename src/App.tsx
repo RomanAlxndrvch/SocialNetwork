@@ -12,25 +12,27 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderCont from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
-import {getAuthUserData, logout} from "./redux/auth-reducer";
+import {logout} from "./redux/auth-reducer";
 import {compose} from "redux";
+import {initializeAppTC} from "./redux/app-reducer";
 import {stateType} from "./redux/redux-store";
-import {DialogsPageType} from "./redux/dialogs-reducer";
+import {Preloader} from "./components/common/Preloader/Preloader";
 
 
 type AppPropsType = {
-    getAuthUserData: () => void
+    initializeAppTC: () => void
+    initialized: boolean
 }
-
 
 class App extends React.Component<AppPropsType> {
 
     componentDidMount() {
-        this.props.getAuthUserData()
+        this.props.initializeAppTC()
     }
 
     render() {
-        return (
+        if (!this.props.initialized) return <Preloader/>
+        else return (
             <div className={'app-wrapper'}>
                 <HeaderCont/>
                 <Navbar/>
@@ -46,15 +48,21 @@ class App extends React.Component<AppPropsType> {
                     <Route exact path={'/Login'} render={() => <Login/>}/>
                 </div>
             </div>
-
         );
     }
 }
 
+type appMapStateToPropsType = {
+    initialized: boolean
+}
+
+const mapStateToProps = (state: stateType): appMapStateToPropsType => ({
+    initialized: state.app.initialized
+})
 
 export default compose<React.ComponentType>(
     withRouter,
-    connect(null, {getAuthUserData, logout}))(App)
+    connect(mapStateToProps, {initializeAppTC, logout}))(App)
 
 
 

@@ -31,8 +31,10 @@ const initializedSuccessAC = () => {
 }
 
 
-export const initializeTC = () => (dispatch: AppDispatch) => {
-    getAuthUserData()
+export const initializeAppTC = () => (dispatch: AppDispatch) => {
+    dispatch(getAuthUserData()).then(res => {
+        dispatch(initializedSuccessAC())
+    })
 }
 
 export default appReducer
