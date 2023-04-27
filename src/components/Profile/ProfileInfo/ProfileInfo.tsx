@@ -4,6 +4,7 @@ import {ProfileType} from "../../../redux/profile-reducer";
 import {Preloader} from "../../common/Preloader/Preloader";
 import avatar from './../../../assets/images/149071.png'
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
 
 
 type ProfileInfoPropsType = {
@@ -34,8 +35,8 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                     {props.profile.fullName}
                 </div>
                 <div>
-                    <ProfileStatus updateStatus={props.updateStatus}
-                                   status={props.status === null ? 'Enter Status' : props.status}/>
+                    <ProfileStatusWithHooks updateStatus={props.updateStatus}
+                                            status={props.status === null ? 'Enter Status' : props.status}/>
                 </div>
             </div>
         )
