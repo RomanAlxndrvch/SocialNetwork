@@ -5,6 +5,7 @@ type ProfileStatusPropsType = {
     updateStatus: (e: string) => void
 }
 
+
 const ProfileStatusWithHooks = (props: ProfileStatusPropsType) => {
     const [editMode, setEditMode] = useState(false)
     const [status, setStatus] = useState('')
@@ -12,7 +13,7 @@ const ProfileStatusWithHooks = (props: ProfileStatusPropsType) => {
     const activateEditMode = () => {
         setEditMode(true)
     }
-    
+
     const deactivateEditMode = () => {
         props.updateStatus(status)
         setEditMode(false)
